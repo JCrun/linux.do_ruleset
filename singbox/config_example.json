@@ -1,54 +1,11 @@
 {
-  "dns": {
-    "servers": [
-      {
-        "tag": "cloudflare",
-        "server": "1.1.1.1",
-        "server_port": 443,
-        "type": "https",
-        "path": "/dns-query",
-        "detour": "🚀 节点选择"
-      },
-      {
-        "tag": "Local-DNS",
-        "server": "223.5.5.5",
-        "server_port": 443,
-        "type": "https",
-        "path": "/dns-query",
-        "detour": "🎯 全球直连"
-      },
-      {
-        "tag": "block",
-        "address": "rcode://success"
-      },
-      {
-        "tag": "local",
-        "address": "local",
-        "detour": "🎯 全球直连"
-      }
-    ],
-    "rules": [
-      {
-        "rule_set": "linux.do",
-        "server": "Local-DNS"
-      }
-    ],
-    "final": "cloudflare",
-    "strategy": "prefer_ipv4"
-  },
   "route": {
     "rules": [
       {
-        "protocol": "dns",
         "action": "route",
-        "outbound": "any"
-      },
-      {
-        "rule_set": "linux.do",
-        "outbound": "🎯 全球直连"
-      },
-      {
-        "ip_is_private": true,
+        "rule_set": [
+          "linux.do"
+        ],
         "outbound": "🎯 全球直连"
       }
     ],
@@ -56,26 +13,53 @@
       {
         "tag": "linux.do",
         "type": "remote",
-        "format": "binary",
         "url": "https://raw.githubusercontent.com/JCrun/linux.do_ruleset/main/singbox/linux.do.srs",
-        "download_detour": "🎯 全球直连"
+        "format": "binary",
+        "download_detour": "🚀 节点选择"
+      }
+    ]
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "Local-DNS",
+        "type": "https",
+        "domain_resolver": "Local-DNS-Resolver",
+        "server_port": 443,
+        "server": "sing.ddd.oaifree.com",
+        "path": "/query-dns"
+      },
+      {
+        "tag": "Local-DNS-Resolver",
+        "type": "udp",
+        "server_port": 53,
+        "server": "223.5.5.5"
+      },
+      {
+        "tag": "Remote-DNS",
+        "type": "h3",
+        "detour": "🚀 节点选择",
+        "domain_resolver": "Remote-DNS-Resolver",
+        "server_port": 443,
+        "server": "1.1.1.1",
+        "path": "/dns-query"
+      },
+      {
+        "tag": "Remote-DNS-Resolver",
+        "type": "udp",
+        "detour": "🚀 节点选择",
+        "server_port": 53,
+        "server": "8.8.8.8"
       }
     ],
-    "final": "🚀 节点选择",
-    "auto_detect_interface": true,
-    "default_domain_resolver": "local"
-  },
-  "outbounds": [
-    {
-      "tag": "🚀 节点选择",
-      "type": "selector",
-      "outbounds": [
-        "auto"
-      ]
-    },
-    {
-      "tag": "🎯 全球直连",
-      "type": "direct"
-    }
-  ]
+    "rules": [
+      {
+        "action": "route",
+        "rule_set": [
+          "linux.do"
+        ],
+        "server": "Local-DNS"
+      }
+    ]
+  }
 }
