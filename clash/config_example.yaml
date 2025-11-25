@@ -1,0 +1,43 @@
+dns:
+  enable: true
+  ipv6: false
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  nameserver-policy:
+    'linux.do,+.linux.do': 
+      - https://223.5.5.5/dns-query
+      - https://dns.alidns.com/dns-query
+
+rule-providers:
+  linux.do:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/JCrun/linux.do_ruleset/main/clash/linux.do.yaml
+    path: ./ruleset/linux.do.yaml
+    interval: 86400
+
+rules:
+  - RULE-SET,linux.do,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY
+
+proxies:
+  # 你的代理配置
+
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - auto
+      # 其他代理节点
+  
+  - name: DIRECT
+    type: select
+    proxies:
+      - DIRECT
