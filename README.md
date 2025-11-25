@@ -60,8 +60,8 @@ curl -O https://raw.githubusercontent.com/JCrun/linux.do_ruleset/main/singbox/li
   "type": "https",
   "domain_resolver": "Local-DNS-Resolver",
   "server_port": 443,
-  "server": "hk.alph.netlib.re",
-  "path": "/dohgo"
+  "server": "sing.ddd.oaifree.com",
+  "path": "/query-dns"
 },
 {
   "tag": "Local-DNS-Resolver",
