@@ -177,8 +177,8 @@ RULE-SET,https://raw.githubusercontent.com/JCrun/linux.do_ruleset/main/surge/lin
 
 在 `[Host]` 中添加：
 ```ini
-linux.do = server:https://clash.ddd.oaifree.com/query-dns
-*.linux.do = server:https://clash.ddd.oaifree.com/query-dns
+linux.do = server:https://surge.ddd.oaifree.com/query-dns
+*.linux.do = server:https://surge.ddd.oaifree.com/query-dns
 ```
 
 > **注意**：
