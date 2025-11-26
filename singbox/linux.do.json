@@ -4,6 +4,15 @@
     {
       "domain_suffix": [
         "linux.do"
+      ],
+      "domain": [
+        "linux.do",
+        "connect.linux.do",
+        "cdk.linux.do"
+      ],
+      "ip_cidr": [
+        "104.20.16.234/32",
+        "172.66.166.61/32"
       ]
     }
   ]

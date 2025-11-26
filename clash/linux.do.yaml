@@ -1,3 +1,7 @@
 payload:
   - DOMAIN-SUFFIX,linux.do
   - DOMAIN,linux.do
+  - DOMAIN,connect.linux.do
+  - DOMAIN,cdk.linux.do
+  - IP-CIDR,104.20.16.234/32
+  - IP-CIDR,172.66.166.61/32
