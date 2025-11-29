@@ -6,8 +6,6 @@
         "rule_set": [
           "linux.do"
         ],
-        "tls_record_fragment": true,
-        "tls_fragment_fallback_delay": 500ms,
         "outbound": "🎯 全球直连"
       }
     ],
